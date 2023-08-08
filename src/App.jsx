@@ -1,11 +1,20 @@
-import Todo from "./Components/Todo/Todo.jsx";
+import { Route, Routes } from 'react-router-dom'
+
+import AllMeetupsPage from "./pages/AllMeetups";
+import NewMeetupPage from "./pages/NewMeetup";
+import FavoritesPage from "./pages/Favorites";
+import MainNav from './Components/layout/MainNav';
 
 function App() {
   return (
     <>
-      <h1>Next.js & React - The Complete Guide</h1>
+      <MainNav />
 
-      <Todo />
+      <Routes>
+        <Route exact path='/' element={<AllMeetupsPage />} />
+        <Route exact path="/favorites" element={<FavoritesPage />} />
+        <Route exact path="/new-meetup" element={<NewMeetupPage />} />
+      </Routes>
     </>
   )
 }

@@ -1,12 +1,13 @@
+import css from './styles/Modal.module.css';
 
 function Modal(props) {
   return (
-    <div className='modal'>
+    <div className={css.modal}>
       <h3>Are you sure?</h3>
 
-      <button className='btn btn--alt' onClick={props.onCancel}>Cancel</button>
-      <button className='btn' onClick={props.onConfirm}>Confirm</button>
-    </div>
+      <button className={css.btn + " " + css.btn_alt} onClick={props.onCancel}>Cancel</button>
+      <button className={css.btn} onClick={props.onConfirm}>Confirm</button>
+    </div >
   )
 }
 
