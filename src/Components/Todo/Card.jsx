@@ -1,7 +1,8 @@
 import { useState } from "react";
+import css from './styles/Todo.module.css';
+
 import Modal from "./Modal";
 import Backdrop from "./Backdrop";
-import css from './styles/Todo.module.css';
 
 function Card(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);

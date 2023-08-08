@@ -1,4 +1,3 @@
-import React from 'react';
 import css from './style/MeetupItem.module.css';
 import Card from '../ui/Card';
 

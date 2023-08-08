@@ -20,7 +20,6 @@ const DUMMY_DATA = [
 ];
 
 
-import React from 'react';
 import MeetupList from '../Components/Meetups/MeetupList';
 
 function AllMeetupsPage() {

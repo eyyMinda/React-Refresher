@@ -1,5 +1,5 @@
-import Card from "./Card";
 import css from './styles/Todo.module.css';
+import Card from "./Card";
 
 function Todo() {
   return (
