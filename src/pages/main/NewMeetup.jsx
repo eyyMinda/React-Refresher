@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import NewMeetupForm from "../Components/Meetups/NewMeetupForm";
+import NewMeetupForm from "../../Components/Meetups/NewMeetupForm";
 
 
 function NewMeetupPage() {

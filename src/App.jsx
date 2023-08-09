@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from './Components/layout/Layout';
 
-import AllMeetupsPage from "./pages/AllMeetups";
-import NewMeetupPage from "./pages/NewMeetup";
-import FavoritesPage from "./pages/Favorites";
+import AllMeetupsPage from "./pages/main/AllMeetups";
+import NewMeetupPage from "./pages/main/NewMeetup";
+import FavoritesPage from "./pages/main/Favorites";
 
 function App() {
   return (

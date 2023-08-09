@@ -1,55 +1,40 @@
 import css from './style/MeetupItem.module.css';
+import { useState, useContext } from 'react';
+
+import FavoritesContext from '../../setup/favorites-context';
 import Card from '../ui/Card';
-import { useEffect, useState } from 'react';
 
 function MeetupItem(props) {
-  const { id, title, image, address, description } = props;
+  const favoritesCtx = useContext(FavoritesContext);
+  const isFavorite = favoritesCtx.isFavorite(props.id);
 
-  const [addedFavorite, setAddedFavorite] = useState(false);
   // Description Shortener if neeeded
   const [extraInfo, setExtraInfo] = useState(false);
   const limitChar = (str, limit) => str.length > limit ? `${str.slice(0, limit)}...` : str;
   const limitCharLength = 260;
-  const descriptionShort = extraInfo ? description : limitChar(description, limitCharLength);
-
-  // Fetch and check if is already in favorites
-  useEffect(() => {
-    fetch(import.meta.env.VITE_DB_FAVORITES_URL).then(res => res.json()).then(data => {
-      setAddedFavorite(Object.values(data).some(obj => obj.id == id));
-    })
-  }, [])
+  const description = extraInfo ? props.description : limitChar(props.description, limitCharLength);
 
 
-  // Add to favorites
-  function handleAddFavorite() {
-    fetch(import.meta.env.VITE_DB_FAVORITES_URL, {
-      method: 'POST',
-      body: JSON.stringify(props),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(() => {
-      setAddedFavorite(true);
-    })
+  function handleToggleFavoriteStatus() {
+    isFavorite ?
+      favoritesCtx.removeFavorite(props.id) :
+      favoritesCtx.addFavorite(props);
   }
-  // Remove from favorites
-  function handleRemoveFavorite() {
 
-  }
 
   return (
     <li className={css.item}>
       <Card>
         <div className={css.image}>
-          <img src={image} alt={title} />
+          <img src={props.image} alt={props.title} />
         </div>
 
         <div className={css.content}>
-          <h3>{title}</h3>
-          <address>{address}</address>
+          <h3>{props.title}</h3>
+          <address>{props.address}</address>
           <p>
-            {descriptionShort}
-            {description.length > limitCharLength
+            {description}
+            {props.description.length > limitCharLength
               && <button className={css.read_more_btn} onClick={() => setExtraInfo(!extraInfo)}>
                 {extraInfo ? 'Show Less.' : 'Show More!'}
               </button>}
@@ -57,9 +42,9 @@ function MeetupItem(props) {
         </div>
 
         <div className={css.actions}>
-          {addedFavorite ?
-            <button onClick={handleRemoveFavorite}>Remove From Favorites</button> :
-            <button onClick={handleAddFavorite}>Add To Favorites</button>}
+          <button onClick={handleToggleFavoriteStatus}>
+            {isFavorite ? 'Remove From Favorites' : 'Add To Favorites'}
+          </button>
         </div>
       </Card>
     </li>
