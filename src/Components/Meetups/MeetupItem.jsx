@@ -6,7 +6,7 @@ function MeetupItem(props) {
   const { id, title, image, address, description } = props;
 
   const [addedFavorite, setAddedFavorite] = useState(false);
-  // Description Shortener if needed
+  // Description Shortener if neeeded
   const [extraInfo, setExtraInfo] = useState(false);
   const limitChar = (str, limit) => str.length > limit ? `${str.slice(0, limit)}...` : str;
   const limitCharLength = 260;
@@ -14,13 +14,12 @@ function MeetupItem(props) {
 
   // Fetch and check if is already in favorites
   useEffect(() => {
-    fetch(import.meta.env.VITE_DB_FAVORITES_URL).then(res => res.json()).then(
-      data => {
-        const isFavorite = Object.values(data).map(obj => obj.id) == id;
-        setAddedFavorite(isFavorite);
-      }
-    )
+    fetch(import.meta.env.VITE_DB_FAVORITES_URL).then(res => res.json()).then(data => {
+      setAddedFavorite(Object.values(data).some(obj => obj.id == id));
+    })
   }, [])
+
+
   // Add to favorites
   function handleAddFavorite() {
     fetch(import.meta.env.VITE_DB_FAVORITES_URL, {
