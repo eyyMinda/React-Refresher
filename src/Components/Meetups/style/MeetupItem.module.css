@@ -37,3 +37,12 @@
 .actions button:active {
   background-color: #ffe2ed;
 }
+.read_more_btn {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: cornflowerblue;
+}
+.read_more_btn:hover {
+  text-decoration: underline;
+}
